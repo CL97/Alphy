@@ -1,0 +1,240 @@
+FORMAT: 1A
+HOST: http://api.alphymart.com/
+
+# Alphy API V1
+
+Alphy provides a complete API accessible via HTTPS.
+
+## Basic Usage
+### Allowed HTTPs requests:
+* `POST` - To create resource
+* `PUT` - To update resource
+* `GET` - Get a resource or list of resources
+* `DELETE` - To delete resource
+
+### Description Of Usual Server Responses:
+* 200 `ok` - the request was successful
+    * `ok` 
+        * `true` mean success to process 
+    * `status` - status of process
+        * `SuccessQuery`
+        * `SuccessInsert`
+        * `SuccessDelete`
+        * `SuccessUpdate`
+        * `SuccessRequest`
+        * `SuccessLogin`
+        * `SuccessLogout`
+        * `SuccessConfirmEmail`
+    * `warning`
+        * null
+    * `error`
+        * null
+    * `data` - Json data response from Api
+        * Object
+    * `timestamp`
+    
+* 400 `Bad Request` - the request could not be understood or was missing required parameters.
+    * `ok` 
+        * `false` mean failed to process
+    * `status` - status of process
+    * `warning` - warning message return from server
+    * `timestamp`
+
+* 401 `Unauthorized` - authentication failed or user doesn't have 
+permissions for requested operation.
+
+* 500 `Internal server error` - server error
+
+### Attributes
+* Date: The standard is called ISO-8601 and the format is: `YYYY-MM-DDTHH:mm:ss.sssZ`
+    * Example: `2018-08-08T08:08:08.000Z`.
+
+## RetailerAccount
+
+### /api/v1/retailerAccount/{id}
+
+#### GET
+
++ To retrieve retailer info based on retailer ID.
+
++ Parameters
+    
+    + id(required) - Retailer account Id
+    
++ Request
+
+    + Headers
+    
+            Content-Type: application/json
+            Header: {header}
+            Token: {token}
+    
+    + Body
+
++ Response 200 (application/json)
+
+        {
+                "ok": true,
+                "status": "SuccessQuery",
+                "warning": null,
+                "error": null,
+                "data": {
+                    "id": 23,
+                    "retailerAccountDTO": {
+                        "accountType": 1,
+                        "email": "",
+                        "imgUrl": "",
+                        "firstName": "",
+                        "lastName": "",
+                        "companyName": "",
+                        "gender": true,
+                        "contactNo": "",
+                        "altContactNo": "",
+                        "dateTimeDOB": "2018-08-08T08:08:08",
+                        "nationality": "",
+                        "identityType": 1,
+                        "identityNumber": "",
+                        "address1": "",
+                        "address2": "",
+                        "address3": "",
+                        "address4": "",
+                        "city": "",
+                        "postcode": ,
+                        "state": "",
+                        "country": "",
+                        "description": "",
+                        "dateTimeLastLogin": "2018-08-08T08:08:08"
+                    }
+                },
+                "timestamp": 1517991128
+        }
+
+### /api/v1/retailerAccount/CreateUser
+
+#### POST
+Create retailer account.
+
++ Parameters
+    + retailerAccountDTO - - accountType, email, imgUrl, firstName, lastName, companyName,
+    gender, contactNo, altContactNo, dateTimeDOB, nationality, identityType, identityNumber,
+    address1, address2, address3, address4, city, postcode, state, country, description, dateTimeLastLogin
+    
+    + Password
+
++ Request
+
+    + Headers
+        
+            Accept: application/json
+            Header: {header}
+            Token: {token}
+            
+    + Body
+    
+            {
+                "password": "password",
+                "retailerAccountDTO": {
+                        "accountType": 1,
+                        "email": "abc@abcmail.com",
+                        "imgUrl": "",
+                        "firstName": "First",
+                        "lastName": "Last",
+                        "companyName": "ABC Company",
+                        "gender": true,
+                        "contactNo": "0123456789",
+                        "altContactNo": "0123456789",
+                        "dateTimeDOB": "2018-08-08T08:08:08",
+                        "nationality": "Malaysian",
+                        "identityType": 1,
+                        "identityNumber": "920131073212",
+                        "address1": "Address1",
+                        "address2": "Address2",
+                        "address3": "Address3",
+                        "address4": "Address4",
+                        "city": "City",
+                        "postcode": 12345,
+                        "state": "Penang",
+                        "country": "Malaysia",
+                        "description": ""
+                    }
+            }
+
++ Response 200 (application/json)
+
+        {
+            OK
+                
+            + Body
+        
+                {
+                    "ok": true,
+                    "status": "SuccessInsert",
+                    "warning": null,
+                    "error": null,
+                    "data": null,
+                    "timestamp": 1517992916
+                }
+                    
+        }
+    
+### /api/v1/retailerAccount/update/{id}
+
+#### PUT
+
+Edit retailer info based on retailer Id.
+
++ Parameters
+    + id(required) - Retailer account Id
+    
++ Request
+
+    + Headers
+
+            Accept: application/json
+            Token: {token}
+            DKey: {dkey}
+
+    + Body 
+    
+                {
+                    "password": "password",
+                    "retailerAccountDTO": {
+                            "accountType": 1,
+                            "email": "abc@abcmail.com",
+                            "imgUrl": "",
+                            "firstName": "First",
+                            "lastName": "Last",
+                            "companyName": "ABC Company",
+                            "gender": true,
+                            "contactNo": "0123456789",
+                            "altContactNo": "0123456789",
+                            "dateTimeDOB": "2018-08-08T08:08:08",
+                            "nationality": "Malaysian",
+                            "identityType": 1,
+                            "identityNumber": "920131073212",
+                            "address1": "Address1",
+                            "address2": "Address2",
+                            "address3": "Address3",
+                            "address4": "Address4",
+                            "city": "City",
+                            "postcode": 12345,
+                            "state": "Penang",
+                            "country": "Malaysia",
+                            "description": ""
+                        }
+                }
+                
++ Response 200 (application/json)
+
+    OK
+    
+    + Body
+    
+            {
+                    "ok": true,
+                    "status": "SuccessUpdate",
+                    "warning": null,
+                    "error": null,
+                    "data": null,
+                    "timestamp": 1517992916
+            }
